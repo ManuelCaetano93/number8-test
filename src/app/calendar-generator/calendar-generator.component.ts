@@ -40,9 +40,6 @@ export interface Day {
 
 export class CalendarGeneratorComponent implements OnInit {
 
-  private positions = ['bottom-left', 'bottom-right', 'top-left', 'top-right'];
-
-
   @Input() dateChange: Date;
 
   @Input() daysChange: number;
@@ -82,6 +79,17 @@ export class CalendarGeneratorComponent implements OnInit {
     this.init();
   }
 
+  onDaysChangeInit(days) {
+    this.setOptions(this.date, days.target.value);
+    this.initDays();
+    this.init();
+  }
+
+  onDateChangeInit(date) {
+    this.setOptions(date.target.value, this.currentDays);
+    this.initDays();
+    this.init();
+  }
 
   initDayNames(): void {
     this.dayNames = [];
@@ -97,7 +105,6 @@ export class CalendarGeneratorComponent implements OnInit {
     this.currentMonth = 0;
     this.months = [];
 
-    console.log(this.currentDays);
     let anyDaysLeft = true;
     let daysLeft = this.currentDays;
     let i = 0;
@@ -109,7 +116,6 @@ export class CalendarGeneratorComponent implements OnInit {
       if ( isAfter(newActualDate, actualDate) ) {
         actualDate = newActualDate;
       }
-      console.log(actualDate);
       const start = startOfMonth(actualDate);
 
       let cyclyingDays = eachDay(actualDate, addDays(actualDate, daysLeft)).map(date  => {
@@ -130,9 +136,10 @@ export class CalendarGeneratorComponent implements OnInit {
       cyclyingDays = cyclyingDays.filter((obj) => obj);
 
       const currentWeekDay = getDay(start) - this.firstCalendarDay;
-      const prevDays = currentWeekDay < 0 ? 7 - this.firstCalendarDay : currentWeekDay;
+      const lastDayOfCurrentMonth = endOfMonth(cyclyingDays[0].date);
+      const remainingDays = 7 - getDay(lastDayOfCurrentMonth);
 
-      for (let j = 1; j <= prevDays; j++) {
+      for (let j = 1; j <= currentWeekDay; j++) {
         cyclyingDays.unshift({
           date: null,
           day: null,
@@ -145,21 +152,17 @@ export class CalendarGeneratorComponent implements OnInit {
         });
       }
 
-
-      const remainingDays = getDay(endOfWeek(end)) - getDay(end);
-      if (remainingDays !== 0) {
-        for (let j = 1; j <= remainingDays; j++) {
-          cyclyingDays.push({
-            date: null,
-            day: null,
-            month: null,
-            year: null,
-            inThisMonth: true,
-            invalid: true,
-            isEndOfWeek: null,
-            isStartOfWeek: null
-          });
-        }
+      for (let j = 1; j <= remainingDays; j++) {
+        cyclyingDays.push({
+          date: null,
+          day: null,
+          month: null,
+          year: null,
+          inThisMonth: true,
+          invalid: true,
+          isEndOfWeek: null,
+          isStartOfWeek: null
+        });
       }
 
       this.months[i] = cyclyingDays;
@@ -221,3 +224,4 @@ export class CalendarGeneratorComponent implements OnInit {
     }
   }
 }
+

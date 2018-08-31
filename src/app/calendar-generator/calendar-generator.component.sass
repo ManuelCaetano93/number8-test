@@ -6,8 +6,8 @@ $radius: 4px
 $text: black
 $text-secondary: #A4A9B1
 $color: #1A91EB
-$orange: #a06321
-$green: #61891b
+$yellow: #ffff66
+$green: #d9ffb3
 
 .ngx-datepicker-position-bottom-left
   top: 40px
@@ -49,10 +49,14 @@ $green: #61891b
       padding: 15px
       border-bottom: 1px solid black
       display: flex
-      background: $text-secondary
+      background: white
       justify-content: space-between
       align-items: center
       user-select: none
+
+      .svg-container
+        width: 7px
+        height: 10px
 
       svg
         cursor: pointer
@@ -72,7 +76,7 @@ $green: #61891b
       padding: 15px 10px 0
       font-size: 12px
       font-weight: 500
-      background: $text-secondary
+      background: white
 
       .main-calendar-day-names
         width: 100%
@@ -100,30 +104,18 @@ $green: #61891b
           justify-content: center
           cursor: pointer
           user-select: none
-          border: 1px solid black
+          border: 1px solid white
           color: $text
           background: $green
 
+          &.invalid
+            background: $text-secondary
+
+          &.weekend
+              background: $yellow
+
           &.is-prev-month
             color: $text-secondary
-            &.weekend
-              background: $orange
-
-          &:hover, &.is-today
-            background: $green
-            color: $white
-
-          &.is-selected
-            background: $green
-            color: $white
-
-          &.is-disabled
-            cursor: not-allowed
-            color: $text-secondary
-            &.weekend
-              background: $orange
-
-
 
 
       .main-calendar-years
