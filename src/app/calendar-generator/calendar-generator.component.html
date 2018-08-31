@@ -31,7 +31,7 @@
       </g>
       </svg>
     </div>
-    <!-- <span class="topbar-title">  {{ barTitle }} </span> -->
+    <span class="topbar-title">  {{ barTitle }} </span>
     <div class="svg-container">
       <svg width="7px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="Source-Sans---UI-Elements-Kit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -54,12 +54,12 @@
   </div>
   <div class="main-calendar-container">
     <div class="main-calendar-day-names">
-      <!-- <span class="day-name-unit" *ngFor="let name of dayNames">{{ name }}</span> -->
+      <span class="day-name-unit" *ngFor="let name of dayNames">{{ name }}</span>
     </div>
     <div class="main-calendar-days">
-      <!-- <span class="day-unit" *ngFor="let day of days; let i = index;" [ngClass]="{ 'invalid': day.invalid, 'weekend': day.isEndOfWeek || day.isStartOfWeek, 'is-prev-month': !day.inThisMonth, 'is-today': day.isToday}"> -->
-        <!-- {{ day.day }} -->
-      <!-- </span> -->
+      <span class="day-unit" *ngFor="let day of days; let i = index;" [ngClass]="{ 'invalid': day.invalid, 'weekend': day.isEndOfWeek || day.isStartOfWeek, 'is-prev-month': !day.inThisMonth, 'is-today': day.isToday}"> -->
+        {{ day.day }}
+     </span>
     </div>
   </div>
 </div>
